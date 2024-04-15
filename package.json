@@ -28,7 +28,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "concurrently \"env-cmd -f .env.production react-scripts start\" \"cd ../backend && nodemon -r dotenv/config --experimental-json-modules src/index.js\"",
+    "start": "env-cmd -f .env.production react-scripts start",
     "build:production": "env-cmd -f .env.production react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test",
