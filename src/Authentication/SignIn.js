@@ -11,19 +11,19 @@ const SignIn = () => {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        async function checkUserValidity () {
-            try {
-                 await axios.get(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {
-                    withCredentials: true
-                });
-                navigate('/');
-            } catch (error) {
+    // useEffect(() => {
+    //     async function checkUserValidity () {
+    //         try {
+    //              await axios.get(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {
+    //                 withCredentials: true
+    //             });
+    //             navigate('/');
+    //         } catch (error) {
                 
-            }
-        }
-        checkUserValidity ();
-    }, [navigate])
+    //         }
+    //     }
+    //     checkUserValidity ();
+    // }, [navigate])
 
     const handleSubmit = async (values, { setSubmitting }) => {
         setSubmitting(true);
