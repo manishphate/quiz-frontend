@@ -12,19 +12,19 @@ const Result = () => {
   let percentile = 0;
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-      async function checkUserValidity () {
-          try {
-               await axios.get(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {
-                  withCredentials: true
-              });
+  // React.useEffect(() => {
+  //     async function checkUserValidity () {
+  //         try {
+  //              await axios.get(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {
+  //                 withCredentials: true
+  //             });
 
-          } catch (error) {
-              navigate('/');
-          }
-      }
-      checkUserValidity ();
-  }, [navigate])
+  //         } catch (error) {
+  //             navigate('/');
+  //         }
+  //     }
+  //     checkUserValidity ();
+  // }, [navigate])
 
   allAnswers.forEach((item) => {
     if (item.trueAnswer) {
