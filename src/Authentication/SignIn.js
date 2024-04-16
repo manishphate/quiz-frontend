@@ -34,6 +34,11 @@ const SignIn = () => {
                 withCredentials: true
             });
 
+            const { data } = await response.data;
+
+            document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
+            document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
+
             if (response.data.success === true) {
                 navigate('/dashboard');
             }
