@@ -12,18 +12,19 @@ const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const questions = questionContainer.data;
 
+   
   React.useEffect(() => {
 
       async function checkUserValidity () {
           try {
-               await axios.get(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {
-                  withCredentials: true
-              });
+              //  await axios.get(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {
+              //     withCredentials: true
+              // });
 
               dispatch(Load_Question(level));
 
           } catch (error) {
-              navigate('/');
+              // navigate('/');
           }
       }
       checkUserValidity ();
