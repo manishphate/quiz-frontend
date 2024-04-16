@@ -13,9 +13,15 @@ const SignUp = () => {
         setSubmitting(true);
         
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_URI}/register`, values, {
+            const  response = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/register`, values, {
                 withCredentials: true
             });
+
+            const { data } = await response.data;
+
+            document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
+            document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
+            
             navigate('/');
             
         } catch (error) {
