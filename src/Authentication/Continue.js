@@ -8,10 +8,14 @@ const ContinueUI = () => {
 
     const handleContinue =async() => {
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_URI}/refresh-token`, null,{
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/refresh-token`, null,{
                 withCredentials: true
             });
+            const { data } = await response.data;
 
+            document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
+            document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
+            
             navigate('/dashboard');
 
         } catch (error) {
