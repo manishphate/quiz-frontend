@@ -83,19 +83,25 @@ const Dashboard = () => {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        const token = document.cookie;
-        async function checkUserValidity() {
+    useEffect(() => {
+            const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+        const [name, value] = cookie.trim().split('=');
+        acc[name] = value;
+        return acc;
+    }, {});
+
+    const { accessToken, refreshToken } = cookies;
+        async function checkUserValidity () {
             try {
-                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`, token,{
+                 await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{accessToken, refreshToken}, {
                     withCredentials: true
                 });
-        
+                navigate('/dashboard');
             } catch (error) {
-                navigate('/');
+                
             }
         }
-        checkUserValidity();
+        checkUserValidity ();
     }, [navigate])
     
     const handleDrawerOpen = () => {
