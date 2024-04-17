@@ -86,7 +86,7 @@ const Dashboard = () => {
     React.useEffect(() => {
         async function checkUserValidity() {
             try {
-                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {},{
+                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {document.cookie},{
                     withCredentials: true
                 });
         
