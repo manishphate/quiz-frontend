@@ -11,6 +11,7 @@ const SignIn = () => {
 
     const navigate = useNavigate();
 
+    console.log("signin...",document.cookie)
     // useEffect(() => {
     //     async function checkUserValidity () {
     //         try {
