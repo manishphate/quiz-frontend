@@ -162,7 +162,7 @@ const Quiz = () => {
               }
             >
               {answer.answer}
-              <input type="radio" name="answer" id={index} />
+              <input type="radio" name="answer" id={index}  checked={selectedIndex === index}/>
             </label>
           );
         })}
