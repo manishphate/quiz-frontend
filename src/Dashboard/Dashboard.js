@@ -127,6 +127,8 @@ const Dashboard = () => {
             await axios.post(`${process.env.REACT_APP_BACKEND_URI}/logout`, {accessToken, refreshToken}, {
                 withCredentials: true
             });
+            document.cookie = 'accessToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
             navigate('/signIn')
         } catch (error) {
             console.error("Error:", error);
