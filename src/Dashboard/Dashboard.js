@@ -21,7 +21,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Home from '../components/Home';
-import Cookies from "js-cookie";
 
 const drawerWidth = 240;
 
