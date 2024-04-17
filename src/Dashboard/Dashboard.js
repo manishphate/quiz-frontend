@@ -83,7 +83,7 @@ const Dashboard = () => {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    React.useEffect(() => {
             const cookies = document.cookie.split(';').reduce((acc, cookie) => {
         const [name, value] = cookie.trim().split('=');
         acc[name] = value;
