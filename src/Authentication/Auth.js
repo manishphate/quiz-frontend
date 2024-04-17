@@ -6,9 +6,10 @@ const Auth = () => {
 
     const navigate = useNavigate();
     useEffect(() => {
+        const token = document.cookie;
         async function fetchData() {
             try {
-                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{document.cookie}, {
+                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,token, {
                     withCredentials: true
                 });
                 navigate('/dashboard');
