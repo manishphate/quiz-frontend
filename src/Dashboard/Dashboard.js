@@ -21,6 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Home from '../components/Home';
+import Cookies from "js-cookie";
 
 const drawerWidth = 240;
 
@@ -84,26 +85,27 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-            const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-        const [name, value] = cookie.trim().split('=');
-        acc[name] = value;
-        return acc;
-    }, {});
-
-    const { accessToken, refreshToken } = cookies;
-        async function checkUserValidity () {
+        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+            const [name, value] = cookie.trim().split('=');
+            acc[name] = value;
+            return acc;
+        }, {});
+    
+        const { accessToken, refreshToken } = cookies;
+        
+        async function checkUserValidity() {
             try {
-                 await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{accessToken, refreshToken}, {
+                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{ accessToken, refreshToken }, {
                     withCredentials: true
                 });
-                navigate('/dashboard');
+
             } catch (error) {
-                
+                navigate('/');
             }
         }
-        checkUserValidity ();
-    }, [navigate])
-    
+        checkUserValidity();
+    }, [])
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -114,21 +116,20 @@ const Dashboard = () => {
 
     const logout = async () => {
 
-                                const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-        const [name, value] = cookie.trim().split('=');
-        acc[name] = value;
-        return acc;
-    }, {});
-
-    const { accessToken, refreshToken } = cookies;
+        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+            const [name, value] = cookie.trim().split('=');
+            acc[name] = value;
+            return acc;
+        }, {});
+    
+        const { accessToken, refreshToken } = cookies;
 
         try {
-
-            await axios.post(`${process.env.REACT_APP_BACKEND_URI}/logout`, {accessToken, refreshToken}, {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URI}/logout`, { accessToken, refreshToken }, {
                 withCredentials: true
             });
             document.cookie = 'accessToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+            document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
             navigate('/signIn')
         } catch (error) {
             console.error("Error:", error);
@@ -169,6 +170,12 @@ document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;
                         '& .MuiDrawer-paper': {
                             width: drawerWidth,
                         },
+                        // Adjusting the drawer for mobile resolutions
+                        '@media (max-width:600px)': {
+                            '& .MuiDrawer-paper': {
+                                width: '100%',
+                            },
+                        },
                     }}
                     variant="persistent"
                     anchor="right"
@@ -204,4 +211,4 @@ document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;
     );
 }
 
-export default Dashboard
+export default Dashboard;
