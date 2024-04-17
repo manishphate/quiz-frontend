@@ -188,7 +188,7 @@ const Dashboard = () => {
                     <Divider />
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton component={Link} to="/dashboard">
+                            <ListItemButton component={Link} to="/">
                                 <ListItemIcon>
                                     <HomeIcon />
                                 </ListItemIcon>
