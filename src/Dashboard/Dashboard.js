@@ -115,7 +115,14 @@ const Dashboard = () => {
     const logout = async () => {
 
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_URI}/logout`, {}, {
+                        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+        const [name, value] = cookie.trim().split('=');
+        acc[name] = value;
+        return acc;
+    }, {});
+
+    const { accessToken, refreshToken } = cookies;
+            await axios.post(`${process.env.REACT_APP_BACKEND_URI}/logout`, {accessToken, refreshToken}, {
                 withCredentials: true
             });
             navigate('/signIn')
