@@ -114,14 +114,16 @@ const Dashboard = () => {
 
     const logout = async () => {
 
-        try {
-                        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+                                const cookies = document.cookie.split(';').reduce((acc, cookie) => {
         const [name, value] = cookie.trim().split('=');
         acc[name] = value;
         return acc;
     }, {});
 
     const { accessToken, refreshToken } = cookies;
+
+        try {
+
             await axios.post(`${process.env.REACT_APP_BACKEND_URI}/logout`, {accessToken, refreshToken}, {
                 withCredentials: true
             });
