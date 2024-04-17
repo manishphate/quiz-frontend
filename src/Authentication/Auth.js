@@ -8,7 +8,7 @@ const Auth = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                await axios.get(`${process.env.REACT_APP_BACKEND_URI}/current-user`, {
+                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{}, {
                     withCredentials: true
                 });
                 navigate('/dashboard');
