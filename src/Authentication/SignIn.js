@@ -13,10 +13,16 @@ const SignIn = () => {
 
     console.log("signin...",document.cookie)
     useEffect(() => {
-        const token = document.cookie;
+            const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+        const [name, value] = cookie.trim().split('=');
+        acc[name] = value;
+        return acc;
+    }, {});
+
+    const { accessToken, refreshToken } = cookies;
         async function checkUserValidity () {
             try {
-                 await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,token, {
+                 await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{accessToken, refreshToken}, {
                     withCredentials: true
                 });
                 navigate('/dashboard');
