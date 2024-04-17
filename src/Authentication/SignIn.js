@@ -18,7 +18,7 @@ const SignIn = () => {
                  await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{}, {
                     withCredentials: true
                 });
-                navigate('/');
+                navigate('/dashboard');
             } catch (error) {
                 
             }
