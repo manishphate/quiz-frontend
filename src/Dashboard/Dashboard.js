@@ -91,7 +91,7 @@ const Dashboard = () => {
                 });
         
             } catch (error) {
-                navigate('/dashboard');
+                navigate('/');
             }
         }
         checkUserValidity();
