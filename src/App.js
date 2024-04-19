@@ -18,6 +18,7 @@ import ContinueUI from './Authentication/Continue';
 import Auth from './Authentication/Auth';
 import ForgotPassword from './Authentication/ForgotPassword';
 import ResetPassword from './Authentication/ResetPassword';
+import HomeDashboard from './Dashboard/HomeDashboard';
 
 
 
@@ -31,11 +32,15 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route exact path='/' element={<Auth />} />
-            <Route exact path='/signIn' element={<SignIn />} />
+            <Route exact path='/signin' element={<HomeDashboard />} />
+            <Route exact path='/sign-in' element={<SignIn />} />
             <Route path='/signUp' element={<SignUp />} />
             <Route path='/continue' element={<ContinueUI />} />
             <Route path='/forgot-password' element={<ForgotPassword />} />
             <Route path='/reset-password/:id/:token' element={<ResetPassword />} />
+            <Route exact path='/home-dashboard' element={<HomeDashboard />} />
+
+
 
 
             <Route path='/dashboard' element={<Dashboard />} />
