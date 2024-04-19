@@ -129,7 +129,7 @@ const Dashboard = () => {
             });
             document.cookie = 'accessToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
             document.cookie = 'refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-            navigate('/signIn')
+            navigate('/home-dashboard')
         } catch (error) {
             console.error("Error:", error);
 
