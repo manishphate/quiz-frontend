@@ -11,26 +11,26 @@ const SignIn = () => {
 
     const navigate = useNavigate();
 
-    console.log("signin...",document.cookie)
     useEffect(() => {
-            const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-        const [name, value] = cookie.trim().split('=');
-        acc[name] = value;
-        return acc;
-    }, {});
+        const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+            const [name, value] = cookie.trim().split('=');
+            acc[name] = value;
+            return acc;
+        }, {});
 
-    const { accessToken, refreshToken } = cookies;
-        async function checkUserValidity () {
+        const { accessToken, refreshToken } = cookies;
+        async function checkUserValidity() {
             try {
-                 await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{accessToken, refreshToken}, {
+                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`, { accessToken, refreshToken }, {
                     withCredentials: true
                 });
+
                 navigate('/dashboard');
             } catch (error) {
-                
+
             }
         }
-        checkUserValidity ();
+        checkUserValidity();
     }, [navigate])
 
     const handleSubmit = async (values, { setSubmitting }) => {
@@ -54,14 +54,13 @@ const SignIn = () => {
         } catch (error) {
             // console.error("Error:", error);
 
-            if(error.response.status === 404)
-            {
+            if (error.response.status === 404) {
                 setErrorMessage('Email is not registered.');
             }
-            else if(error.response.status === 401){
+            else if (error.response.status === 401) {
                 setPasswordMessage('Incorrect password.');
-            }    
-            
+            }
+
         } finally {
             setSubmitting(false);
             setLoading(false);
@@ -73,16 +72,28 @@ const SignIn = () => {
         password: Yup.string().required('Password is required'),
     });
 
+
     return (
         <>
+            {/* <header className="flex justify-between items-center py-4 px-6 text-white bg-gradient-to-br from-pink-400 to-purple-600">
+                <h1 className="text-2xl font-bold">Quiz</h1>
+                <button
+                    className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-4 rounded"
+                    onClick={handleHome}
+                >
+                    Home
+                </button>
+            </header> */}
+
             {loading && (
                 <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
                     <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
                 </div>
             )}
+
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 sign-in-title">
                         Sign In
                     </h2>
                 </div>
@@ -113,7 +124,7 @@ const SignIn = () => {
 
                                 <div>
                                     <div className="flex items-center justify-between">
-                                        <label  className="block text-sm font-medium leading-6 text-gray-900">
+                                        <label className="block text-sm font-medium leading-6 text-gray-900">
                                             Password
                                         </label>
                                         <div className="text-sm">
@@ -144,12 +155,12 @@ const SignIn = () => {
                                     </button>
                                 </div>
 
-                                <p className="mt-10 text-center text-sm text-gray-500">
+                                {/* <p className="mt-10 text-center text-sm text-gray-500">
                                     Not a member?{' '}
                                     <a href="signUp" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                                         SignUp
                                     </a>
-                                </p>
+                                </p> */}
                             </Form>
                         )}
                     </Formik>
