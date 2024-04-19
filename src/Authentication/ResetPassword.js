@@ -28,9 +28,9 @@ const ResetPassword = () => {
             await axios.post(`${process.env.REACT_APP_BACKEND_URI}/reset-password/${id}/${token}`, values, {
                 withCredentials: true
             });
-            navigate('/signIn');
+            navigate('/home-dashboard');
         } catch (error) {
-            console.error("Error:", error);
+            
         } finally {
             setSubmitting(false);
         }
