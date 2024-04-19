@@ -6,21 +6,26 @@ const ContinueUI = () => {
 
     const navigate = useNavigate();
 
+
     const handleContinue =async() => {
         try {
             const response = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/refresh-token`, null,{
                 withCredentials: true
             });
+
             const { data } = await response.data;
 
             document.cookie = `accessToken=${data.accessToken}; Path=/; SameSite=None; Secure`;
             document.cookie = `refreshToken=${data.refreshToken}; Path=/; SameSite=None; Secure`;
-            
             navigate('/dashboard');
 
         } catch (error) {
-            navigate('/signIn');
+            navigate('/home-dashboard');
         }
+    }
+
+    const handleHome =()=>{
+        navigate('/home-dashboard');
     }
 
     return (
@@ -36,7 +41,7 @@ const ContinueUI = () => {
             </div>
             <p className="mt-8 text-center text-sm text-gray-500">
                 Try another account?{' '}
-                <a href="/signIn" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" onClick={handleHome}>
                     Sign In
                 </a>
             </p>
