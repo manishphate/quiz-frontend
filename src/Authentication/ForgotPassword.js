@@ -29,9 +29,9 @@ const ForgotPassword = () => {
             await axios.post(`${process.env.REACT_APP_BACKEND_URI}/forgot-password`, values, {
                 withCredentials: true
             });
-            navigate('/signIn');
+            navigate('/home-dashboard');
         } catch (error) {
-            console.error("Error:", error);
+            navigate('/home-dashboard');
         } finally {
             setLoading(false);
             setSubmitting(false);
@@ -42,6 +42,9 @@ const ForgotPassword = () => {
         email: Yup.string().email('Invalid email').required('Email is required')
     });
 
+    const handleHome =()=>{
+        navigate('/home-dashboard');
+    }
     return (
         <>
             {loading && (
@@ -93,7 +96,7 @@ const ForgotPassword = () => {
 
                                 <p className="mt-10 text-center text-sm text-gray-500">
                                     Not a member?{' '}
-                                    <a href="/signUp" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                                    <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" onClick={handleHome}>
                                         SignUp
                                     </a>
                                 </p>
