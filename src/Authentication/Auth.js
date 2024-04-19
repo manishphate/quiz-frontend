@@ -6,30 +6,7 @@ const Auth = () => {
 
     const navigate = useNavigate();
     useEffect(() => {
-                    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
-        const [name, value] = cookie.trim().split('=');
-        acc[name] = value;
-        return acc;
-    }, {});
-
-    const { accessToken, refreshToken } = cookies;
-        async function fetchData() {
-            try {
-                await axios.post(`${process.env.REACT_APP_BACKEND_URI}/current-user`,{ accessToken, refreshToken }, {
-                    withCredentials: true
-                });
-                navigate('/dashboard');
-            } catch (error) {
-                console.log(error);
-                // If the error is due to JWT token expiration or access token missing, redirect to continue UI
-                if (error.response.status === 401) {
-                    navigate('/continue'); // Redirect to your continue UI route
-                } else {
-                    navigate('/signIn')
-                }
-            }
-        }
-        fetchData();
+        navigate('/home-dashboard')
     }, [navigate]);
 
     return (
